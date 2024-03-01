@@ -16,6 +16,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     "DATABASE_URL", "postgresql:///adopt")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
 
 connect_db(app)
 
@@ -50,7 +52,7 @@ def add_pet():
         available = form.available.data
 
         # do stuff with data/insert to db
-
+        print(available, "osihdsipdghsdoighsidoghisodghiosdghoisdghsiodgh")
         pet = Pet(name = name,
                          species = species,
                          photo_url=photo_url,
