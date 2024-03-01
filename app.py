@@ -30,7 +30,7 @@ toolbar = DebugToolbarExtension(app)
 def show_homepage():
     """index home page."""
     pets = Pet.query.all()
-    return render_template("homepage", pets=pets)
+    return render_template("homepage.html", pets=pets)
 
 
 

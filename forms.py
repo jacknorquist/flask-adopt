@@ -12,7 +12,7 @@ class AddPetForm(FlaskForm):
     species =SelectField("Species",
                          choices=[('cat', 'Cat'),
                                   ('porcupine', 'Porcupine'),
-                                  ('dog', 'Dog'),],
+                                  ('dog', 'Dog')],
                                   validators=[InputRequired()])
     photo_url = StringField("Photo", validators=[Optional(),
                                                  URL()])
