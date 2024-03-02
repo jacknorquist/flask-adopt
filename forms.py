@@ -24,3 +24,14 @@ class AddPetForm(FlaskForm):
                       validators=[InputRequired()])
     notes = StringField("Notes")
     available = BooleanField('available')
+
+
+class EditPetForm(FlaskForm):
+    """Update Pet form."""
+
+    photo_url = StringField("Photo", validators=[Optional(),
+                                                 URL()])
+    notes = StringField("Notes")
+    available = BooleanField('available')
+
+

@@ -2,11 +2,11 @@
 
 import os
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import connect_db, Pet, db
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
@@ -68,3 +68,31 @@ def add_pet():
     else:
         return render_template(
             "add-pet.html", form=form)
+
+
+@app.route('/<int:pet_id>', methods=["GET", "POST"])
+def show_pet(pet_id):
+    """show current pet info, and edit pet information.
+    redirects to pet info on submit of edit, or renders the
+    template."""
+
+    pet = Pet.query.get_or_404(pet_id)
+    form = EditPetForm(obj=pet)
+
+    if form.validate_on_submit():
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        db.session.commit()
+        flash(f"pet {pet.name} updated!")
+        return redirect(f"/{pet_id}")
+
+
+
+    return render_template('show-pet.html', pet=pet, form=form)
+
+
+

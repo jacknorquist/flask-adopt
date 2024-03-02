@@ -5,13 +5,16 @@
 {% block content %}
 
 {% for pet in pets%}
-<ol>
+<ul>
   <p>Name</p>
   <li>{{pet.name}}</li>
   <img src={{pet.photo_url}} alt="pet-picture">
   <p>Available</p>
   <li><b>{{pet.available}}</b></li>
-</ol>
+  <form>
+    <button type="submit" formaction="/{{pet.id}}" formmethod="GET">Pick me</button>
+  </form>
+</ul>
 {% endfor %}
 
 <a href="/add"><button>Add</button></a>
